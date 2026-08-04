@@ -18,7 +18,7 @@ switch (template) {
   // Thêm nhiều trường hợp nếu cần
   default:
     backgroundUrl = 'https://giaphaviet.kennatech.vn/assets/images/background_template/default.png';
-    color = '#444';
+    color = '#444'
 }
 
 // console.log(color);

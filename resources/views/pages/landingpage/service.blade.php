@@ -64,7 +64,7 @@
             <h4 class="pb-10">{{ __('Genealogy Management') }}</h4>
             <div class="row list-service">
               @foreach ($services1 as $service)
-                <div class="col-xl-4 col-md-4 col-sm-1 col-sx-1 col-4 item">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 item">
                   <div class="blog-post h-100 d-flex flex-column">
                     <div class="blog-post-img">
                       <img class="img-fluid" src="{{ Voyager::image($service->image) }}" alt="blog-post-image" />
@@ -94,7 +94,7 @@
             <h4 class="pb-10">{{ __('Design - Filming - Photography Services') }}</h4>
             <div class="row list-service">
               @foreach ($services2 as $service)
-                <div class="col-xl-4 col-md-4 col-sm-1 col-sx-1 col-4 item">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 item">
                   <div class="blog-post h-100 d-flex flex-column">
                     <div class="blog-post-img">
                       <img class="img-fluid" src="{{ Voyager::image($service->thumbnail('cropped', 'image')) }}"

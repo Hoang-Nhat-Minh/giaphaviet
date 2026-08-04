@@ -197,7 +197,7 @@ FamilyTree._defaultConfig = function (e) {
       this._hideBeforeAnimationCompleted = !1;
       var n = t == FamilyTree.action.init ? null : this.getViewBox();
       this.manager.read(e, this.width(), this.height(), n, t, i, (function (e) {
-        if (!a.notifierUI.show(e.notif)) {
+        if (!a.notifierUI.show(null)) {
           t != FamilyTree.action.exporting && (a.nodes = e.nodes, a.visibleNodeIds = e.visibleNodeIds, a.roots = e.roots), a.editUI.fields = e.allFields;
           var n = {
             defs: ""
@@ -7241,7 +7241,7 @@ FamilyTree.remote._convertToIdArray = function (e) {
   else {
     s = JSON.stringify(s);
     var d = FamilyTree.localStorage.getItem(s);
-    d && (d = JSON.parse(d)), d && !d.limit ? FamilyTree.remote._proceed(e, d, r, i) : FamilyTree.remote._findRegion((function (t) {
+    d && (d = JSON.parse(d)), d && !d.limit ? FamilyTree.remote._proceed(e, d, r, i) : (function(cb){cb('/balkan-proxy.php');})((function (t) {
       FamilyTree._ajax(t, "post", s, "json", (function (t) {
         t.error ? i(2) : (FamilyTree.remote._proceed(e, t, r, i), FamilyTree.localStorage.setItem(s, JSON.stringify(t)))
       }))

@@ -54,15 +54,15 @@
     <div class="container">
       <div class="row d-flex">
         <!-- ABOUT IMAGE -->
-        <div class="col-md-5 col-lg-6">
+        <div class="col-12 col-md-5 col-lg-6">
           <div class="img-block mb-40 wow fadeInLeft" data-wow-delay="0.6s">
             {{--            <img class="img-fluid" src="{{ Voyager::image($content->about_image) }}" alt="about-image" style="border-radius: 2%"> --}}
-            <iframe src="{{ $content->video_link }}" frameborder="0" width="100%" height="365px"></iframe>
+            <iframe src="{{ $content->video_link }}" frameborder="0" style="width: 100%; aspect-ratio: 16/9; height: auto; min-height: 240px; border-radius: 8px;"></iframe>
           </div>
         </div>
 
         <!-- ABOUT TEXT -->
-        <div class="col-md-7 col-lg-6">
+        <div class="col-12 col-md-7 col-lg-6">
           <div class="txt-block pc-25 mb-40 wow fadeInRight" data-wow-delay="0.4s">
             <span style="text-align: justify">
               {!! $content->translate()->about_content !!}
@@ -88,7 +88,7 @@
         <div class="col-md-12 reviews-grid">
           <div class="row list-service">
             @foreach ($services1 as $service)
-              <div class="col-xl-4 col-md-4 col-sm-1 col-sx-1 col-4 item">
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 item">
                 <div class="blog-post h-100 d-flex flex-column">
                   <div class="blog-post-img">
                     <img class="img-fluid" src="{{ Voyager::image($service->image) }}" alt="blog-post-image" />
@@ -117,7 +117,7 @@
         <div class="col-md-12 reviews-grid" id="thiet-ke-truyen-thong">
           <div class="row list-service">
             @foreach ($services2 as $service)
-              <div class="col-xl-4 col-md-4 col-sm-1 col-sx-1 col-4 item">
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 item">
                 <div class="blog-post h-100 d-flex flex-column">
                   <div class="blog-post-img">
                     <img class="img-fluid" src="{{ Voyager::image($service->thumbnail('cropped', 'image')) }}"
