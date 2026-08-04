@@ -180,6 +180,15 @@ class PageController extends Controller
 
   public function album_image_store(Request $request)
   {
+    $request->validate([
+      'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    ], [
+      'image.required' => 'Vui lòng chọn hình ảnh.',
+      'image.image' => 'File tải lên phải là hình ảnh.',
+      'image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif, webp.',
+      'image.max' => 'Dung lượng hình ảnh không được vượt quá 2MB.',
+    ]);
+
     // Lưu file ảnh vào thư mục
     if ($request->hasFile('image')) {
       $image = $request->file('image');

@@ -204,18 +204,18 @@
                             fileError.textContent = ''; // Reset thông báo lỗi
 
                             if (imageFile) {
-                                let validTypes = ['image/jpeg', 'image/png', 'image/gif'];
-                                let maxSize = 5 * 1024 * 1024; // 5MB
+                                let validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+                                let maxSize = 2 * 1024 * 1024; // 2MB
 
                                 if (!validTypes.includes(imageFile.type)) {
-                                    fileError.textContent = 'File phải là ảnh (jpeg, png, gif).';
+                                    fileError.textContent = 'File phải là ảnh (jpeg, png, gif, webp).';
                                     fileError.style.color = 'red';
                                     event.preventDefault();
                                     return;
                                 }
 
                                 if (imageFile.size > maxSize) {
-                                    fileError.textContent = 'Kích thước file không được vượt quá 5MB.';
+                                    fileError.textContent = 'Kích thước file không được vượt quá 2MB.';
                                     fileError.style.color = 'red';
                                     event.preventDefault();
                                     return;

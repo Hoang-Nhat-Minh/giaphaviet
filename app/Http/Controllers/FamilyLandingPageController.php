@@ -28,20 +28,20 @@ class FamilyLandingPageController extends Controller
     }
 
     $data = $request->validate([
-      'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+      'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
       'about' => 'string',
-      'about_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+      'about_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
       'address' => 'string',
       'telephone' => 'string',
       'email' => 'string',
       // 'gallery.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096', // Validate gallery images
     ], [
       'banner.image' => 'Tệp được chọn phải là một hình ảnh.',
-      'banner.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, hoặc gif.',
-      'banner.max' => 'Kích thước tệp không được lớn hơn 4MB.',
+      'banner.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif, hoặc webp.',
+      'banner.max' => 'Kích thước tệp không được lớn hơn 2MB.',
       'about_image.image' => 'Tệp được chọn phải là một hình ảnh.',
-      'about_image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, hoặc gif.',
-      'about_image.max' => 'Kích thước tệp không được lớn hơn 4MB.',
+      'about_image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif, hoặc webp.',
+      'about_image.max' => 'Kích thước tệp không được lớn hơn 2MB.',
       // 'gallery.*.image' => 'Tất cả các tệp trong gallery phải là hình ảnh.',
       // 'gallery.*.mimes' => 'Hình ảnh trong gallery phải có định dạng: jpeg, png, jpg, hoặc gif.',
       // 'gallery.*.max' => 'Kích thước tệp trong gallery không được lớn hơn 4MB.',

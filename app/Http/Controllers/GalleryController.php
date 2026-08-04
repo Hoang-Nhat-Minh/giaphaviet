@@ -16,6 +16,15 @@ class GalleryController extends Controller
       return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
     }
 
+    $request->validate([
+      'gallery' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    ], [
+      'gallery.required' => 'Vui lòng chọn hình ảnh.',
+      'gallery.image' => 'File tải lên phải là hình ảnh.',
+      'gallery.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif, webp.',
+      'gallery.max' => 'Dung lượng hình ảnh không được vượt quá 2MB.',
+    ]);
+
     if ($request->hasFile('gallery')) {
       $file = $request->file('gallery');
       $path = Storage::disk('public')->put('images/gallery', $file);

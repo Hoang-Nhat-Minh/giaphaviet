@@ -43,7 +43,7 @@ class LibaryController extends Controller
     $data = $request->validate([
       'name' => 'required|string',
       'date' => 'required|date',
-      'img' => 'required|image|mimes:jpeg,jpg,png', // Validate the single image field
+      'img' => 'required|image|mimes:jpeg,jpg,png,gif,webp|max:2048', // Validate the single image field max 2MB
       'des' => 'required|string',
       'content' => 'required|string',
     ], [
@@ -53,7 +53,8 @@ class LibaryController extends Controller
       'date.date' => 'Ngày phải là một ngày hợp lệ.',
       'img.required' => 'Ảnh không được để trống.',
       'img.image' => 'Ảnh phải là một file ảnh.',
-      'img.mimes' => 'Ảnh phải có định dạng jpeg, jpg, png.',
+      'img.mimes' => 'Ảnh phải có định dạng jpeg, jpg, png, gif, webp.',
+      'img.max' => 'Dung lượng ảnh không được vượt quá 2MB.',
       'des.required' => 'Giới thiệu ngắn không được để trống.',
       'des.string' => 'Giới thiệu phải là một chuỗi.',
       'content.required' => 'Nội dung không được để trống.',
@@ -143,7 +144,7 @@ class LibaryController extends Controller
     $data = $request->validate([
       'name' => 'required|string|max:255',
       'date' => 'required|date',
-      'img' => 'image|mimes:jpeg,jpg,png|nullable', // Allow optional image upload
+      'img' => 'nullable|image|mimes:jpeg,jpg,png,gif,webp|max:2048', // Allow optional image upload max 2MB
       'des' => 'required|string|max:255',
       'content' => 'required|string',
     ], [
@@ -152,7 +153,8 @@ class LibaryController extends Controller
       'date.required' => 'Ngày không được để trống.',
       'date.date' => 'Ngày phải là một ngày hợp lệ.',
       'img.image' => 'Ảnh phải là một file ảnh.',
-      'img.mimes' => 'Ảnh phải có định dạng jpeg, jpg, png.',
+      'img.mimes' => 'Ảnh phải có định dạng jpeg, jpg, png, gif, webp.',
+      'img.max' => 'Dung lượng ảnh không được vượt quá 2MB.',
       'des.required' => 'Giới thiệu không được để trống.',
       'content.required' => 'Nội dung không được để trống.',
     ]);

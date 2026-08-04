@@ -329,6 +329,10 @@
         family.editUI.on('element-btn-click', function(sender, args) {
 
             FamilyTree.fileUploadDialog(function(file) {
+                if (file && file.size > 2 * 1024 * 1024) {
+                    alert('Dung lượng hình ảnh không được vượt quá 2MB.');
+                    return;
+                }
                 var data = new FormData();
                 data.append('files', file);
                 fetch('{{ route('upload.photo') }}', {
@@ -338,11 +342,19 @@
                         },
                         body: data
                     })
-                    .then(response => {
-                        response.json().then(responseData => {
-                            args.input.value = responseData;
-                            sender.setAvatar(responseData);
-                        });
+                    .then(async response => {
+                        if (!response.ok) {
+                            const errData = await response.json().catch(() => ({}));
+                            const msg = errData.message || (errData.errors && Object.values(errData.errors)[0][0]) || 'Lỗi tải ảnh lên. Dung lượng tối đa 2MB.';
+                            alert(msg);
+                            return;
+                        }
+                        const responseData = await response.json();
+                        args.input.value = responseData;
+                        sender.setAvatar(responseData);
+                    })
+                    .catch(error => {
+                        console.error('Error uploading photo:', error);
                     });
             });
         });
