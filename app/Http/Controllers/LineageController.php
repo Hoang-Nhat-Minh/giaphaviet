@@ -33,7 +33,7 @@ class LineageController extends Controller
     if ($file = $request->file('files')) {
       $fileData = $this->path->put('members', $file);
     }
-    $url_image = env('APP_URL') . '/storage/' . $fileData;
+    $url_image = url('storage/' . $fileData);
     return response()->json($url_image);
   }
 }
