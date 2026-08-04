@@ -1,0 +1,143 @@
+.workspace {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    font: 700 12px system-ui;
+}
+
+.dragging {
+    cursor: grabbing;
+}
+
+ul.tree {
+    /* overflow-x: auto; */
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+ul.tree li a span {
+    border: 1px solid gray;
+    padding: 10px 2px;
+    font-weight: 600;
+}
+
+ul.tree li a span:hover {
+    color: white;
+    background: rgb(0, 128, 255);
+}
+
+ul.tree,
+ul.tree ul {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul.tree li {
+    display: block;
+    width: auto;
+    float: left;
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+}
+
+ul.tree ul li {
+    background-image: url(data:image/gif;base64,R0lGODdhAQABAIABAAAAAP///ywAAAAAAQABAAACAkQBADs=);
+    background-repeat: repeat-x;
+    background-position: left top;
+}
+
+ul.tree li a {
+    display: block;
+    width: 12em;
+    /* border: 1px solid gray;
+    padding: 10px 0px; */
+    margin: 0 auto;
+    text-align: center;
+    white-space: normal;
+    letter-spacing: normal;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul.tree ul li:last-child {
+    background-repeat: no-repeat;
+    background-size: 50% 1px;
+    background-position: left top;
+}
+
+ul.tree ul li:first-child {
+    background-repeat: no-repeat;
+    background-size: 50% 1px;
+    background-position: right top;
+}
+
+ul.tree ul li:first-child:last-child {
+    background: none;
+}
+
+ul.tree ul li a {
+    background: url(data:image/gif;base64,R0lGODdhAQABAIABAAAAAP///ywAAAAAAQABAAACAkQBADs=) no-repeat 50% top;
+    background-size: 1px 0.8em;
+    padding-top: 1.5em;
+}
+
+ul.tree ul {
+    background: url(data:image/gif;base64,R0lGODdhAQABAIABAAAAAP///ywAAAAAAQABAAACAkQBADs=) no-repeat 50% top;
+    background-size: 1px 0.8em;
+    margin-top: 1.2ex;
+    padding-top: 0.8em;
+}
+
+body {
+    font-family: sans-serif;
+    color: #666;
+    text-align: center;
+}
+
+A,
+A:visited,
+A:active {
+    color: #c00;
+    text-decoration: none;
+}
+
+A:hover {
+    text-decoration: underline;
+}
+
+ul.tree,
+#wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+ul.tree {
+    width: 100%;
+}
+
+.clearer {
+    clear: both;
+}
+
+p {
+    margin-top: 2em;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    img[alt="backgroundLeft"],
+    img[alt="backgroundRight"] {
+        display: none !important;
+    }
+}
+

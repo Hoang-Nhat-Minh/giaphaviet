@@ -1,0 +1,19 @@
+#tree>svg {
+        // padding-top:200px;
+        background-image: url('https://giapha.kennatech.vn/assets/images/rong-2.png');
+        padding-bottom:45px;
+    }
+    @media only screen and (max-width: 500px) {
+        #tree>svg {
+            // padding-top:200px;
+            background-image: url('https://giapha.kennatech.vn/assets/images/rong-2.png');
+            padding-bottom:30px;
+        }
+    }
+
+
+
+
+
+Button Add
+<svg ${'data-ctrl-n-t-menu-id'}="{id}" x="0" y="0" xlink:href="#base_tree_menu" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: rgb(102 102 102 / 82%);cursor:pointer;"><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path></svg>
