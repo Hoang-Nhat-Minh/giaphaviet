@@ -65,6 +65,35 @@
             gap: 12px;
         }
 
+        /* Bộ nút ẩn/hiện trang trí Header / Footer */
+        .decor-toggles {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f1f5f9;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toggle-btn input[type="checkbox"] {
+            accent-color: #b02522;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
         .btn-print-pdf {
             background: linear-gradient(135deg, #b02522 0%, #8e1c19 100%);
             color: #ffffff;
@@ -130,11 +159,50 @@
             color: #fbbf24;
         }
 
+        /* Thống nhất khu vực in gia phả */
+        #pdf-print-area {
+            width: 100%;
+            margin-top: 65px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header & Footer trang trí */
+        .decor-header-box {
+            width: 100%;
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            background-color: #ffffff;
+        }
+
+        .bg-header-img {
+            max-height: 220px;
+            width: auto;
+            max-width: 90%;
+            object-fit: contain;
+        }
+
+        .decor-footer-box {
+            width: 100%;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 30px;
+            background-color: #ffffff;
+        }
+
+        .bg-footer-img {
+            width: 300px;
+            max-width: 80%;
+            object-fit: contain;
+        }
+
         /* Khung hiển thị cây gia phả */
         #tree-container {
             width: 100%;
-            height: calc(100vh - 65px);
-            margin-top: 65px;
+            height: calc(100vh - 80px);
             position: relative;
             background-color: #ffffff;
         }
@@ -168,10 +236,20 @@
                 height: 100% !important;
             }
 
-            #tree-container {
+            #pdf-print-area {
                 margin-top: 0 !important;
-                height: 100vh !important;
-                width: 100vw !important;
+                width: 100% !important;
+            }
+
+            .decor-header-box,
+            .decor-footer-box {
+                background: transparent !important;
+            }
+
+            #tree-container {
+                height: auto !important;
+                min-height: 80vh !important;
+                width: 100% !important;
             }
 
             #tree {
@@ -192,7 +270,20 @@
                 <div class="sub-title">Tự động giữ nguyên bố cục Vector nét cao cho nhà in (A0, A1, A2...)</div>
             </div>
         </div>
+        
         <div class="action-btns">
+            <!-- Nút bật tắt hiển thị Header và Footer -->
+            <div class="decor-toggles">
+                <label class="toggle-btn" title="Ẩn / Hiện hình ảnh Header ở phía trên cây gia phả">
+                    <input type="checkbox" id="chk-header" onchange="toggleHeader(this.checked)">
+                    <i class="fa fa-image"></i> Ảnh Header
+                </label>
+                <label class="toggle-btn" title="Ẩn / Hiện hình ảnh Footer ở phía dưới cây gia phả">
+                    <input type="checkbox" id="chk-footer" onchange="toggleFooter(this.checked)">
+                    <i class="fa fa-picture-o"></i> Ảnh Footer
+                </label>
+            </div>
+
             <button type="button" class="btn-export-svg" onclick="downloadSvg()">
                 <i class="fa fa-download"></i> Tải File SVG Nét
             </button>
@@ -208,9 +299,24 @@
         <span>Mẹo: Trong cửa sổ In, chọn <strong>Save as PDF</strong>, Khổ giấy <strong>A0 / A1 / Custom</strong>, Tỉ lệ <strong>100%</strong> và tích chọn <strong>Đồ họa nền (Background Graphics)</strong>.</span>
     </div>
 
-    <!-- Khung Cây Gia Phả -->
-    <div id="tree-container">
-        <div id="tree"></div>
+    <!-- Khu vực In Gia Phả bao gồm Header + Tree + Footer -->
+    <div id="pdf-print-area">
+
+        <!-- Hình ảnh Header (bg-header.png) -->
+        <div id="pdf-header-container" class="decor-header-box" style="display: none;">
+            <img src="{{ asset('assets/images/bg-header.png') }}" class="bg-header-img" alt="Header Gia Phả">
+        </div>
+
+        <!-- Khung Cây Gia Phả -->
+        <div id="tree-container">
+            <div id="tree"></div>
+        </div>
+
+        <!-- Hình ảnh Footer (bggiaphaft.png) -->
+        <div id="pdf-footer-container" class="decor-footer-box" style="display: none;">
+            <img src="{{ asset('assets/images/bggiaphaft.png') }}" class="bg-footer-img" alt="Footer Gia Phả">
+        </div>
+
     </div>
 
     <script>
@@ -294,6 +400,22 @@
         });
 
         family.load(dataInit);
+
+        // Hàm Ẩn / Hiện hình ảnh Header
+        function toggleHeader(show) {
+            var headerEl = document.getElementById('pdf-header-container');
+            if (headerEl) {
+                headerEl.style.display = show ? 'block' : 'none';
+            }
+        }
+
+        // Hàm Ẩn / Hiện hình ảnh Footer
+        function toggleFooter(show) {
+            var footerEl = document.getElementById('pdf-footer-container');
+            if (footerEl) {
+                footerEl.style.display = show ? 'block' : 'none';
+            }
+        }
 
         function triggerPdfPrint() {
             window.print();
