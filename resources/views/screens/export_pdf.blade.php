@@ -189,7 +189,7 @@
         /* Footer trang trí: Nằm bên trong #tree-container, Position Absolute & Căn giữa phía dưới */
         .decor-footer-box {
             position: absolute;
-            bottom: 15px;
+            bottom: 0px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
@@ -323,7 +323,7 @@
 
         <!-- Khung Cây Gia Phả (Container show tree) chứa nền bggiapha2.jpg -->
         <div id="tree-container">
-            
+
             <!-- Hình ảnh Header (bg-header.png) nằm TRONG #tree-container với position: absolute & căn giữa phía trên -->
             <div id="pdf-header-container" class="decor-header-box" style="display: none;">
                 <img src="{{ asset('assets/images/bg-header.png') }}" class="bg-header-img" alt="Header Gia Phả">
