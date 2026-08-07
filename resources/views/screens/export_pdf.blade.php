@@ -17,7 +17,7 @@
         html {
             width: 100%;
             height: 100%;
-            background-color: #f8fafc;
+            background-color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow-x: auto;
             -webkit-print-color-adjust: exact !important;
@@ -146,16 +146,15 @@
             flex-direction: column;
             align-items: center;
             position: relative;
+            background-color: #ffffff;
         }
 
-        /* Khung hiển thị cây gia phả (Container show tree) chứa nền bggiapha2.jpg */
+        /* Khung hiển thị cây gia phả (Container show tree) - Nền trắng sạch */
         #tree-container {
             width: 100%;
             height: calc(100vh - 65px);
             position: relative;
-            background-image: url('{{ asset('assets/images/bggiapha2.jpg') }}');
-            background-size: cover;
-            background-position: center;
+            background-color: #ffffff;
             box-sizing: border-box;
         }
 
@@ -215,8 +214,20 @@
             display: none !important;
         }
 
-        /* CSS dành riêng cho chế độ In / Xuất PDF (Print Media Query) */
+        /* CSS dành riêng cho chế độ In / Xuất PDF (Print Media Query) - Nền trắng hoàn toàn */
         @media print {
+
+            /* Ẩn hoàn toàn tất cả thanh cuộn (Scrollbar) trên mọi trình duyệt khi in / xuất PDF */
+            ::-webkit-scrollbar {
+                display: none !important;
+                width: 0 !important;
+                height: 0 !important;
+            }
+
+            * {
+                -ms-overflow-style: none !important;
+                scrollbar-width: none !important;
+            }
 
             .no-print,
             .export-toolbar {
@@ -230,6 +241,7 @@
                 padding: 0 !important;
                 width: 100% !important;
                 height: 100% !important;
+                overflow: hidden !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -238,6 +250,8 @@
                 margin-top: 0 !important;
                 width: 100% !important;
                 position: relative !important;
+                background: #ffffff !important;
+                overflow: visible !important;
             }
 
             #tree-container {
@@ -245,7 +259,8 @@
                 min-height: 100vh !important;
                 width: 100% !important;
                 position: relative !important;
-                background-image: url('{{ asset('assets/images/bggiapha2.jpg') }}') !important;
+                background: #ffffff !important;
+                overflow: visible !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -259,26 +274,23 @@
                 width: 100% !important;
                 text-align: center !important;
                 background: transparent !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
             }
 
             .decor-footer-box {
                 position: absolute !important;
-                bottom: 15px !important;
+                bottom: 0px !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
                 z-index: 100 !important;
                 width: 100% !important;
                 text-align: center !important;
                 background: transparent !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
             }
 
             #tree {
                 width: 100% !important;
                 height: 100% !important;
+                overflow: visible !important;
             }
         }
     </style>
@@ -321,7 +333,7 @@
     <!-- Khu vực In Gia Phả: Header và Footer đều đè absolute bên trong #tree-container -->
     <div id="pdf-print-area">
 
-        <!-- Khung Cây Gia Phả (Container show tree) chứa nền bggiapha2.jpg -->
+        <!-- Khung Cây Gia Phả (Container show tree) -->
         <div id="tree-container">
 
             <!-- Hình ảnh Header (bg-header.png) nằm TRONG #tree-container với position: absolute & căn giữa phía trên -->
