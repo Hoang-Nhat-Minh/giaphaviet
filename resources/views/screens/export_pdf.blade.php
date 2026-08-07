@@ -175,7 +175,7 @@
             background-repeat: repeat;
         }
 
-        /* Header trang trí với background bg-body.png */
+        /* Header: Chiều ngang 100% bằng khớp với container show tree */
         .decor-header-box {
             width: 100%;
             text-align: center;
@@ -184,16 +184,35 @@
             background-image: url('{{ asset('assets/images/bg-body.png') }}');
             background-position: top;
             background-repeat: repeat;
+            box-sizing: border-box;
         }
 
         .bg-header-img {
             max-height: 220px;
             width: auto;
-            max-width: 90%;
+            max-width: 100%;
             object-fit: contain;
+            display: block;
+            margin: 0 auto;
         }
 
-        /* Footer trang trí (Position Absolute đè lên nền cây gia phả) */
+        /* Khung hiển thị cây gia phả (Container show tree) */
+        #tree-container {
+            width: 100%;
+            height: calc(100vh - 80px);
+            position: relative;
+            background-image: url('{{ asset('assets/images/bggiapha2.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            box-sizing: border-box;
+        }
+
+        #tree {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Footer trang trí: Nằm bên trong #tree-container, Position Absolute & Căn giữa ngang */
         .decor-footer-box {
             position: absolute;
             bottom: 20px;
@@ -203,27 +222,15 @@
             pointer-events: none;
             width: 100%;
             text-align: center;
+            box-sizing: border-box;
         }
 
         .bg-footer-img {
             width: 300px;
             max-width: 80%;
             object-fit: contain;
-        }
-
-        /* Khung hiển thị cây gia phả với nền phả đồ */
-        #tree-container {
-            width: 100%;
-            height: calc(100vh - 80px);
-            position: relative;
-            background-image: url('{{ asset('assets/images/bggiapha2.jpg') }}');
-            background-size: cover;
-            background-position: center;
-        }
-
-        #tree {
-            width: 100%;
-            height: 100%;
+            display: block;
+            margin: 0 auto;
         }
 
         /* Ẩn hoàn toàn các UI không cần thiết của FamilyTreeJS */
@@ -263,6 +270,7 @@
             }
 
             .decor-header-box {
+                width: 100% !important;
                 background-image: url('{{ asset('assets/images/bg-body.png') }}') !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -272,6 +280,7 @@
                 height: auto !important;
                 min-height: 80vh !important;
                 width: 100% !important;
+                position: relative !important;
                 background-image: url('{{ asset('assets/images/bggiapha2.jpg') }}') !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -283,6 +292,8 @@
                 left: 50% !important;
                 transform: translateX(-50%) !important;
                 z-index: 100 !important;
+                width: 100% !important;
+                text-align: center !important;
                 background: transparent !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -337,19 +348,19 @@
             <strong>100%</strong> và tích chọn <strong>Đồ họa nền (Background Graphics)</strong>.</span>
     </div>
 
-    <!-- Khu vực In Gia Phả bao gồm Header + Tree + Footer -->
+    <!-- Khu vực In Gia Phả bao gồm Header + Tree (chứa Footer) -->
     <div id="pdf-print-area">
 
-        <!-- Hình ảnh Header (bg-header.png) với nền bg-body.png -->
+        <!-- Hình ảnh Header (bg-header.png) với chiều ngang 100% khớp với container show tree -->
         <div id="pdf-header-container" class="decor-header-box" style="display: none;">
             <img src="{{ asset('assets/images/bg-header.png') }}" class="bg-header-img" alt="Header Gia Phả">
         </div>
 
-        <!-- Khung Cây Gia Phả chứa nền bggiapha2.jpg và Footer absolute -->
+        <!-- Khung Cây Gia Phả (Container show tree) chứa nền bggiapha2.jpg và Footer absolute căn giữa -->
         <div id="tree-container">
             <div id="tree"></div>
 
-            <!-- Hình ảnh Footer (bggiaphaft.png) căn giữa & position absolute đè trên nền phả đồ -->
+            <!-- Hình ảnh Footer (bggiaphaft.png) nằm TRONG #tree-container với position: absolute & căn giữa -->
             <div id="pdf-footer-container" class="decor-footer-box" style="display: none;">
                 <img src="{{ asset('assets/images/bggiaphaft.png') }}" class="bg-footer-img" alt="Footer Gia Phả">
             </div>
