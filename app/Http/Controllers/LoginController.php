@@ -301,6 +301,53 @@ class LoginController extends Controller
     return view('screens.auth.profile');
   }
 
+  public function exportPdfPreview()
+  {
+    $user = Auth::user();
+    $branch = Branch::where('id', $user->branch_id)->first() ?? Branch::where('lineage_id', $user->lineage_id)->first();
+
+    if (!$branch || empty($branch->data)) {
+      return redirect()->back()->with('error', 'Không tìm thấy dữ liệu gia phả.');
+    }
+
+    $template = \App\Http\Controllers\TemplateController::checkTemplate();
+    return view('screens.export_pdf', compact('branch', 'template'));
+  }
+
+  public function exportPdfDownload(Request $request)
+  {
+    $user = Auth::user();
+    $branch = Branch::where('id', $user->branch_id)->first() ?? Branch::where('lineage_id', $user->lineage_id)->first();
+
+    if (!$branch || empty($branch->data)) {
+      return redirect()->back()->with('error', 'Không tìm thấy dữ liệu gia phả.');
+    }
+
+    // Nếu server có cài đặt Spatie Browsershot (Puppeteer)
+    if (class_exists('\Spatie\Browsershot\Browsershot')) {
+      try {
+        $url = route('export.pdf.preview');
+        $pdfContent = \Spatie\Browsershot\Browsershot::url($url)
+          ->waitUntilNetworkIdle()
+          ->emulateMedia('print')
+          ->showBackground()
+          ->pdf();
+
+        $filename = 'GiaPha_' . Str::slug($user->name) . '_' . date('Ymd') . '.pdf';
+
+        return response($pdfContent, 200, [
+          'Content-Type' => 'application/pdf',
+          'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ]);
+      } catch (\Exception $e) {
+        \Log::error('Browsershot Export PDF failed: ' . $e->getMessage());
+      }
+    }
+
+    // Mặc định fallback: Mở trang xem trước bản in sạch kèm lệnh tự động gọi window.print()
+    return redirect()->route('export.pdf.preview', ['autoprint' => 1]);
+  }
+
   public function clanInfo()
   {
     // $templates = Template::all();

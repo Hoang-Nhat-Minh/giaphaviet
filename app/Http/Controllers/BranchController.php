@@ -18,12 +18,12 @@ class BranchController extends Controller
     $slug_gia_pha = $slug;
 
     $template = \App\Http\Controllers\TemplateController::checkTemplate();
-    
+
     // Ghi log số lượng thành viên
     if ($branch && !empty($branch->data)) {
-        $dataArray = is_string($branch->data) ? json_decode($branch->data, true) : $branch->data;
-        $memberCount = is_array($dataArray) ? count($dataArray) : 0;
-        \Log::info("Branch {$branch->id} loaded with {$memberCount} members.");
+      $dataArray = is_string($branch->data) ? json_decode($branch->data, true) : $branch->data;
+      $memberCount = is_array($dataArray) ? count($dataArray) : 0;
+      \Log::info("Branch {$branch->id} loaded with {$memberCount} members.");
     }
 
 
@@ -58,8 +58,8 @@ class BranchController extends Controller
     if ($loaiDichVu === 2 && $memberCount > 150) {
       return response()->json(['message' => 'Bạn đã đạt tối đa thành viên cho Gói 2 (Tối đa 150 thành viên).'], 400);
     }
-    if ($loaiDichVu >= 3 && $memberCount > 499) {
-      return response()->json(['message' => 'Hệ thống hiện tại chỉ hỗ trợ tối đa 200 thành viên.'], 400);
+    if ($loaiDichVu >= 3 && $memberCount > 500) {
+      return response()->json(['message' => 'Hệ thống hiện tại chỉ hỗ trợ tối đa 500 thành viên.'], 400);
     }
 
     $branch->data = $data;

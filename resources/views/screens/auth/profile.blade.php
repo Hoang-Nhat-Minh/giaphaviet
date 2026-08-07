@@ -262,6 +262,23 @@
           </div>
         </div>
 
+        <div class="info-item-box span-full" style="grid-column: span 2; background: linear-gradient(135deg, #fffaf7 0%, #fbf2ed 100%); border: 1.5px solid rgba(176, 37, 34, 0.2);">
+          <div class="info-icon-box" style="background: #b02522; color: #ffffff;">
+            <i class="fa fa-file-pdf-o"></i>
+          </div>
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 w-100">
+            <div>
+              <div class="info-label" style="color: #b02522;">{{ __('Xuất Cây Gia Phả (PDF In Ấn)') }}</div>
+              <div class="info-value" style="font-size: 0.875rem; color: #64748b;">
+                {{ __('Xuất bản file PDF Vector độ phân giải cao để mang đi in khổ lớn (A0, A1, A2...)') }}
+              </div>
+            </div>
+            <a href="{{ route('export.pdf.preview') }}" target="_blank" class="lang-btn-pill active" style="background: #b02522; border: none; padding: 8px 20px; font-size: 0.9rem; white-space: nowrap;">
+              <i class="fa fa-print me-1"></i> {{ __('Xuất file PDF') }}
+            </a>
+          </div>
+        </div>
+
         <div class="info-item-box span-full" style="grid-column: span 2;">
           <div class="info-icon-box">
             <i class="fa fa-globe"></i>

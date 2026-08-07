@@ -94,6 +94,10 @@ Route::middleware(['auth', 'checkDateTime', 'check.announcement'])->group(functi
     Route::get('/profile', [LoginController::class, 'profile'])->name('profile');
     Route::get('/clan-info', [LoginController::class, 'clanInfo'])->name('clan_info');
 
+    // Route xuất file PDF gia phả in ấn khổ lớn
+    Route::get('/export-pdf-preview', [LoginController::class, 'exportPdfPreview'])->name('export.pdf.preview');
+    Route::get('/export-pdf-download', [LoginController::class, 'exportPdfDownload'])->name('export.pdf.download');
+
     // Lịch sử và sự kiện
     Route::get('/library', [LibaryController::class, 'index'])->name('library');
     Route::get('/library/add', [LibaryController::class, 'add'])->name('library.add');
