@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +13,17 @@
             padding: 0;
         }
 
-        body, html {
+        body,
+        html {
             width: 100%;
             height: 100%;
             background-color: #f8fafc;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow-x: auto;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
         }
 
-        /* Thanh công cụ xem trước & in ấn (Ẩn khi thực hiện Print PDF) */
         .export-toolbar {
             position: fixed;
             top: 0;
@@ -163,19 +166,24 @@
         #pdf-print-area {
             width: 100%;
             margin-top: 65px;
-            background-color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            background-image: url('{{ asset('assets/images/bg-body.png') }}');
+            background-position: top;
+            background-repeat: repeat;
         }
 
-        /* Header & Footer trang trí */
+        /* Header trang trí với background bg-body.png */
         .decor-header-box {
             width: 100%;
             text-align: center;
             padding-top: 20px;
             padding-bottom: 10px;
-            background-color: #ffffff;
+            background-image: url('{{ asset('assets/images/bg-body.png') }}');
+            background-position: top;
+            background-repeat: repeat;
         }
 
         .bg-header-img {
@@ -185,12 +193,16 @@
             object-fit: contain;
         }
 
+        /* Footer trang trí (Position Absolute đè lên nền cây gia phả) */
         .decor-footer-box {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            pointer-events: none;
             width: 100%;
             text-align: center;
-            padding-top: 15px;
-            padding-bottom: 30px;
-            background-color: #ffffff;
         }
 
         .bg-footer-img {
@@ -199,12 +211,14 @@
             object-fit: contain;
         }
 
-        /* Khung hiển thị cây gia phả */
+        /* Khung hiển thị cây gia phả với nền phả đồ */
         #tree-container {
             width: 100%;
             height: calc(100vh - 80px);
             position: relative;
-            background-color: #ffffff;
+            background-image: url('{{ asset('assets/images/bggiapha2.jpg') }}');
+            background-size: cover;
+            background-position: center;
         }
 
         #tree {
@@ -222,34 +236,56 @@
 
         /* CSS dành riêng cho chế độ In / Xuất PDF (Print Media Query) */
         @media print {
+
             .no-print,
             .export-toolbar,
             .print-tip-bar {
                 display: none !important;
             }
 
-            body, html {
+            body,
+            html {
                 background: #ffffff !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 width: 100% !important;
                 height: 100% !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
             #pdf-print-area {
                 margin-top: 0 !important;
                 width: 100% !important;
+                background-image: url('{{ asset('assets/images/bg-body.png') }}') !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
-            .decor-header-box,
-            .decor-footer-box {
-                background: transparent !important;
+            .decor-header-box {
+                background-image: url('{{ asset('assets/images/bg-body.png') }}') !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
             #tree-container {
                 height: auto !important;
                 min-height: 80vh !important;
                 width: 100% !important;
+                background-image: url('{{ asset('assets/images/bggiapha2.jpg') }}') !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .decor-footer-box {
+                position: absolute !important;
+                bottom: 20px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                z-index: 100 !important;
+                background: transparent !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
             #tree {
@@ -259,6 +295,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Thanh công cụ điều khiển -->
@@ -270,7 +307,7 @@
                 <div class="sub-title">Tự động giữ nguyên bố cục Vector nét cao cho nhà in (A0, A1, A2...)</div>
             </div>
         </div>
-        
+
         <div class="action-btns">
             <!-- Nút bật tắt hiển thị Header và Footer -->
             <div class="decor-toggles">
@@ -296,25 +333,26 @@
     <!-- Hướng dẫn in ấn -->
     <div class="print-tip-bar no-print">
         <i class="fa fa-lightbulb-o"></i>
-        <span>Mẹo: Trong cửa sổ In, chọn <strong>Save as PDF</strong>, Khổ giấy <strong>A0 / A1 / Custom</strong>, Tỉ lệ <strong>100%</strong> và tích chọn <strong>Đồ họa nền (Background Graphics)</strong>.</span>
+        <span>Mẹo: Trong cửa sổ In, chọn <strong>Save as PDF</strong>, Khổ giấy <strong>A0 / A1 / Custom</strong>, Tỉ lệ
+            <strong>100%</strong> và tích chọn <strong>Đồ họa nền (Background Graphics)</strong>.</span>
     </div>
 
     <!-- Khu vực In Gia Phả bao gồm Header + Tree + Footer -->
     <div id="pdf-print-area">
 
-        <!-- Hình ảnh Header (bg-header.png) -->
+        <!-- Hình ảnh Header (bg-header.png) với nền bg-body.png -->
         <div id="pdf-header-container" class="decor-header-box" style="display: none;">
             <img src="{{ asset('assets/images/bg-header.png') }}" class="bg-header-img" alt="Header Gia Phả">
         </div>
 
-        <!-- Khung Cây Gia Phả -->
+        <!-- Khung Cây Gia Phả chứa nền bggiapha2.jpg và Footer absolute -->
         <div id="tree-container">
             <div id="tree"></div>
-        </div>
 
-        <!-- Hình ảnh Footer (bggiaphaft.png) -->
-        <div id="pdf-footer-container" class="decor-footer-box" style="display: none;">
-            <img src="{{ asset('assets/images/bggiaphaft.png') }}" class="bg-footer-img" alt="Footer Gia Phả">
+            <!-- Hình ảnh Footer (bggiaphaft.png) căn giữa & position absolute đè trên nền phả đồ -->
+            <div id="pdf-footer-container" class="decor-footer-box" style="display: none;">
+                <img src="{{ asset('assets/images/bggiaphaft.png') }}" class="bg-footer-img" alt="Footer Gia Phả">
+            </div>
         </div>
 
     </div>
@@ -330,7 +368,9 @@
         FamilyTree.elements.CustomTextArea = function(data, editElement, minWidth, readOnly) {
             var id = FamilyTree.elements.generateId();
             var value = data[editElement.binding] || '';
-            return { html: '' };
+            return {
+                html: ''
+            };
         };
 
         let dataInit = {!! $branch->data !!};
@@ -382,7 +422,8 @@
                     if (args.node.tags.includes("male") && !args.node.tags.includes("head_of_the_clan_male")) {
                         args.node.tags.push("head_of_the_clan_male");
                         args.node.templateName = "head_of_the_clan_male";
-                    } else if (args.node.tags.includes("female") && !args.node.tags.includes("head_of_the_clan_female")) {
+                    } else if (args.node.tags.includes("female") && !args.node.tags.includes(
+                            "head_of_the_clan_female")) {
                         args.node.tags.push("head_of_the_clan_female");
                         args.node.templateName = "head_of_the_clan_female";
                     }
@@ -391,7 +432,8 @@
                     if (args.node.tags.includes("male") && !args.node.tags.includes("branch_head_male")) {
                         args.node.tags.push("branch_head_male");
                         args.node.templateName = "branch_head_male";
-                    } else if (args.node.tags.includes("female") && !args.node.tags.includes("branch_head_female")) {
+                    } else if (args.node.tags.includes("female") && !args.node.tags.includes(
+                            "branch_head_female")) {
                         args.node.tags.push("branch_head_female");
                         args.node.templateName = "branch_head_female";
                     }
@@ -443,4 +485,5 @@
         });
     </script>
 </body>
+
 </html>
